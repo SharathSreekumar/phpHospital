@@ -45,7 +45,7 @@
 		<div class="container col-lg-4"></div>
 		<div class="container col-lg-4">
 			<div>
-				<form action="<?=$_SERVER['PHP_SELF'];?>" method="post"  enctype="multipart/form-data" onSubmit="return verifyRegData()" id="formRegPat">
+				<form action="<?=$_SERVER['PHP_SELF'];?>" method="post"  enctype="multipart/form-data" onSubmit="return verifyRegUpData()" id="formRegUpPat">
 				<?php
 
 							$con = new mysqli("localhost","root","","");
@@ -95,6 +95,13 @@
        								$(document).ready(function(){alert("Not created");});
        							</script>';
 							}
+						}else{
+							echo <<<EOF
+       							<script type="text/javascript">
+          							$(document).ready(function(){alert("Form Incomplete");});
+       							</script>
+EOF;
+        exit();
 						} 
 					} /*else {
 							$con = new mysqli("localhost","root","","");

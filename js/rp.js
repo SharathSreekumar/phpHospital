@@ -17,3 +17,12 @@ function verifyRegData(){//checks if certains parameters are satisfied i.e. the 
 		return false;
 	}
 }
+
+function verifyRegUpData(){//checks if certains parameters are satisfied i.e. the suffer, & doctor is filled
+	var suffer = document.forms["formRegUpPat"]["suffer"].value, doctor = document.forms["formRegUpPat"]["phyname"].value;
+
+	if(suffer == "" || suffer== null || doctor == "" || doctor== null){
+		alert("Please complete the form");
+		return false;
+	}
+}
