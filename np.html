@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><title>New Patient | asd</title>
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<div class="navbar-brand">
+					<h4>HEALTHCARE</h4>
+				</div>
+			</div>
+			<div class="collapse navbar-collapse col" id="bs-example-navbar-collapse-1">
+    	      		<ul class="nav navbar-nav navbar-right">
+        	    		<li><a href="log.html">Home</a></li>
+    		        	<li><a href="#support">Support</a></li>
+    		        	<li class="dropdown"><a href="#forms" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Forms <span class="caret"></span></a>
+    		        		<ul class="dropdown-menu">
+            					<li><a href="np.html">New Patient</a></li>
+            					<li><a href="rp.html">Regular Patient</a></li>
+          					</ul>
+    		        	</li>
+        	    		<li><a href="#specs">Specs</a></li>
+            			<li><a href="#team">The Team</a></li>
+            			<li><a href="#contact">Contact Us</a></li>
+          			</ul>
+        	</div>
+		</div>
+	</nav>
+	<div class="container"></div>
+	<div class="row">
+		<div class="container col-lg-4"></div>
+		<div class="container col-lg-4">
+			<h2 style="text-align:center">NEW PATIENT</h2>
+		</div>
+		<div class="container col-lg-4"></div>
+	</div>
+	<div class="row">
+		<div class="container col-lg-4"></div>
+		<div class="container col-lg-4">
+			<div class="jumbotron">
+				<form action="newpat.php" method="post" enctype="multipart/form-data" onSubmit="return verifyData()" id="formNewPat">
+					<label>Name:</label><p><input type="text" class="form-control" id="newname" name="newName" placeholder="Name"></p>
+    				<label>Address:</label><p><input type="text" class="form-control" id="newaddr" name="newAddr" placeholder="Address"></p>
+    				<label>DoB:</label><p><input type="date" class="form-control" id="newdob" name="newDoB" placeholder="Date of Birth"></p>
+    				<label>Age:</label><p><input type="number" class="form-control" id="newage" name="newAge" min="1" max="100" placeholder="Age"></p>
+    				<label>Contact No:</label><p><input type="text" class="form-control" id="newcontact" name="newContact" placeholder="Contact Number"></p>
+    				<label>Blood Group:</label>
+    				<div class="btn-group">
+    					<select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="bloodgrp" name="bloodGroup">
+    						<option value="A+">A+</option>
+    						<option value="B+">B+</option>
+    						<option value="AB+">AB+</option>
+    						<option value="O+">O+</option>
+    						<option value="A-">A-</option>
+    						<option value="B-">B-</option>
+    						<option value="AB-">AB-</option>
+    						<option value="O-">O-</option>
+    					</select>
+					</div><br/><br/>
+					<label>Image:</label><input type="file" id="fileupload" name="fileUpload" onChange="readUrl(this);">(Max-size 128KiB)<img id="imgUpload" src="image/blank_person.jpg" style="height:200px" alt="..." class="img-rounded"><br/>
+					<label>Emergency Contact No1:</label><p><input type="text" class="form-control" id="new_emercon1" name="newEmerCon1" placeholder="Emergency Contact Number"></p>
+					<label>Emergency Contact No2:</label><p><input type="text" class="form-control" id="new_emercon2" name="newEmerCon2" placeholder="Emergency Contact Number"></p>
+					<div class="checkbox"><label><input type="checkbox" id="checkNp"> I hereby accept that all the information provided by me is true</label></div>
+					<button type="submit" class="btn btn-success" id="submitNp" disabled>Create New Record</button>
+				</form>
+    		</div>
+		</div>
+		<div class="container col-lg-4"></div>
+	</div>
+	<script src="js/jquery-1.11.2.min.js"></script>
+   	<script src="js/bootstrap.min.js"></script>
+   	<script src="js/np.js"></script>
+</body>
+</html>	
