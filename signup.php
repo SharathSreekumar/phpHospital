@@ -21,11 +21,12 @@
         echo '
        <script type="text/javascript">
        		$(document).ready(function(){alert("Successfully created account. Please Login to access account");});
-       </script>';
+       </script>';//Pop's up if the account was created successfully, ready-> means that when the page is loaded completely and set, then pop the alert
 //EOF;
         exit();
     		}else{//userId already already exist
           include("index.html");
+          //Pop's up if the account exists, ready-> means that when the page is loaded completely and set, then pop the alert
     			echo <<<EOF
        <script type="text/javascript">
           $(document).ready(function(){alert("Username already exists! Please try another Id");});
@@ -42,7 +43,7 @@ EOF;
         include("index.html");
         exit();
     	}
-    }else{// if the data in form is empty
+    }else{// if the data/textboxes in form are empty
     		echo <<<EOF
        <script type="text/javascript">
        window.onload=function(){alert("Please Fill data");}

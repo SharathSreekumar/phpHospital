@@ -18,7 +18,7 @@ function readUrl(input){
 	}
 }
 
-function verifyData(){
+function verifyData(){//verify if the textbox contains value or not
 	var name = document.forms["formNewPat"]["newname"].value, addr = document.forms["formNewPat"]["newaddr"].value, dob = document.forms["formNewPat"]["newdob"].value, age = document.forms["formNewPat"]["newage"].value;
 	var contact = document.forms["formNewPat"]["newcontact"].value, emerCon1 = document.forms["formNewPat"]["new_emercon1"].value, emerCon2 = document.forms["formNewPat"]["new_emercon2"].value;
 

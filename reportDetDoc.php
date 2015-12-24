@@ -45,36 +45,36 @@
 		<div class="container col-lg-4"></div>
 		<div class="container col-lg-4">
 			<div>
-				<form action="" method="post"  enctype="multipart/form-data" onSubmit="return verifyRegData()" id="formRegPat">
+				<form action="" method="post"  enctype="multipart/form-data" onSubmit="return verifyRegData()" id="formRegPat"><!--action="" so that we remain in same page / excute in same page-->
 				<?php
 
 							$con = new mysqli("localhost","root","","");
-    						if (!$con){
+    						if (!$con){// checking if Connection  to database is successful or not
         						die('Could not connect: ' . $con->connect_error);
     						}
 
-    						$id = $_POST['viewme'];
+    						$id = $_POST['viewme'];//$var_name = $_POST['name_of_the_html/php_elements'].value
 
-    						$query = "SELECT * FROM `hospital`.`log` WHERE `npid`='$id'";
-    						$result = $con->query($query);
+    						$query = "SELECT * FROM `hospital`.`log` WHERE `npid`='$id'";//find the specific patients data from the database
+    						$result = $con->query($query);//execute the query
 
-    						if($result->num_rows > 0) {
-    							while($row = $result->fetch_assoc()) {
-    								echo "<label class=\"col-lg-12\"><input type=\"hidden\" name=\"subme\" value=".$row['npid']."/></label>";
-									echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\">".$row['name']."</label>";
-									echo "<label class=\"col-lg-6\">Age:</label><label class=\"col-lg-6\">".$row['age']."</label>";
-									echo "<label class=\"col-lg-6\">Contact Number:</label><label class=\"col-lg-6\">".$row['nos']."</label>";
-									echo "<label class=\"col-lg-6\">Blood Group:</label><label class=\"col-lg-6\">".$row['bgroup']."</label>";
-									echo "<label class=\"col-lg-6\" style=\"padding-left:0px;padding-right:0px\">Emergency Contact1:</label><label class=\"col-lg-6\">".$row['con1']."</label>";
-									echo "<label class=\"col-lg-6\" style=\"padding-left:0px;padding-right:0px\">Emergency Contact2:</label><label class=\"col-lg-6\">".$row['con2']."</label>";
-									echo "<h4><label>SUFFERING FROM</label></h4><label class=\"col-lg-12\">".$row['suffer']."</label>";
-									echo "<h4><label>MEDICATION</label></h4><label class=\"col-lg-12\">".$row['medicine']."</label>";
+    						if($result->num_rows > 0) {//checks if num_rows > 0
+    							while($row = $result->fetch_assoc()) {//while row <= num_rows
+    								echo "<label class=\"col-lg-12\"><input type=\"hidden\" name=\"subme\" value=".$row['npid']."/></label>";//store the id value, but not display i.e. hidden
+									echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\">".$row['name']."</label>";//display patient's name
+									echo "<label class=\"col-lg-6\">Age:</label><label class=\"col-lg-6\">".$row['age']."</label>";//patient's age
+									echo "<label class=\"col-lg-6\">Contact Number:</label><label class=\"col-lg-6\">".$row['nos']."</label>";//patient's contact no
+									echo "<label class=\"col-lg-6\">Blood Group:</label><label class=\"col-lg-6\">".$row['bgroup']."</label>";//patient's blood Grp
+									echo "<label class=\"col-lg-6\" style=\"padding-left:0px;padding-right:0px\">Emergency Contact1:</label><label class=\"col-lg-6\">".$row['con1']."</label>";//patient's emergency Contact No 1
+									echo "<label class=\"col-lg-6\" style=\"padding-left:0px;padding-right:0px\">Emergency Contact2:</label><label class=\"col-lg-6\">".$row['con2']."</label>";//patient's emergency contact No 2
+									echo "<h4><label>SUFFERING FROM</label></h4><label class=\"col-lg-12\">".$row['suffer']."</label>";//patient suffering from
+									echo "<h4><label>MEDICATION</label></h4><label class=\"col-lg-12\">".$row['medicine']."</label>";//patient's prescribed medicine
 									echo "<h3><label>PHYSICIAN</label></h3>";
-									echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\">".$row['doctor']."</label>";
-									echo "<label class=\"col-lg-6\">Contact No:</label><label class=\"col-lg-6\">".$row['contact']."</label>";
+									echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\">".$row['doctor']."</label>";//patient's Physician/Doctor
+									echo "<label class=\"col-lg-6\">Contact No:</label><label class=\"col-lg-6\">".$row['contact']."</label>";//Doctor's Contact No
 								}
 							}
-							$con->close();
+							$con->close();//close the connection after execution
 				?>
 				</form>
 			</div>

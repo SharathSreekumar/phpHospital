@@ -36,7 +36,7 @@
 	<div class="row">
 		<div class="container col-lg-4"></div>
 		<div class="container col-lg-4">
-			<h2 style="text-align:center">REGULAR PATIENTS</h2>
+			<h2 style="text-align:center">PATIENT'S BRIEF DESCRIPTION</h2>
 		</div>
 		<div class="container col-lg-4"></div>
 	</div>
@@ -50,10 +50,10 @@
         		die('Could not connect: ' . $con->connect_error);
     		}
 
-    		$query = "SELECT * FROM `hospital`.`log`";
+    		$query = "SELECT * FROM `hospital`.`log`";//display all the patients data from the database
     		$result = $con->query($query);
 
-    		if($result->num_rows > 0) {
+    		if($result->num_rows > 0) {// if row > 0, then 'n' data exists
     			echo "<table border='1'>
 				<tr>
 				<th class=\"col-lg-1\">Name</th>
@@ -67,9 +67,10 @@
 				<th class=\"col-lg-2\">Image</th>
 				</tr>";
 
+				// while row <= num_rows, fetch the data
 				while($row = $result->fetch_assoc()) {
 					echo "<tr>";
-					echo "<td class=\"col-lg-1\">" . $row['name'] . "</td>";
+					echo "<td class=\"col-lg-1\">" . $row['name'] . "</td>";//$row['attribute-in-database']
   					echo "<td class=\"col-lg-1\">" . $row['addr'] . "</td>";
   					echo "<td class=\"col-lg-1\">" . $row['dob'] . "</td>";
   					echo "<td class=\"col-lg-1\">" . $row['age'] . "</td>";
@@ -79,8 +80,10 @@
   					echo "<td class=\"col-lg-1\">" . $row['con2'] . "</td>";
 
   					$imagen = $row['image'];
-  					$imagen = base64_encode($imagen);
-  					echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";
+  					$imagen = base64_encode($imagen);//building back compressed image to the original image
+  					echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
+  					//Edit button directs the page to Update option
+  					//View report directs to viewing the details of the Patient
   					echo "<td class=\"col-lg-1\"><p style=\"text-align:center\"><button type=\"submit\"class=\"btn\" name=\"subme\" value=". $row['npid'] .">Edit</button></p><p><button class=\"btn\" name=\"viewme\" formaction=\"reportDetDoc.php\"value=". $row['npid'] .">View Report</button></p></td>";
   					
   					echo "</tr>";
