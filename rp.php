@@ -62,13 +62,13 @@
     							while($row = $result->fetch_assoc()) {
     								echo "<label class=\"col-lg-12\"><input type=\"hidden\" name=\"subme\" value=".$row['npid']."/></label>";
 									echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\">".$row['name']."</label>";
-									echo "<label class=\"col-lg-6\">Age:</label><label class=\"col-lg-6\">".$row['age']."</label>";
-									echo "<label class=\"col-lg-6\">Contact Number:</label><label class=\"col-lg-6\">".$row['nos']."</label>";
+									echo "<label class=\"col-lg-6\">Age:</label><label class=\"col-lg-6\">".$row['age']." years (".$row['dob'].")</label>";
+									echo "<label class=\"col-lg-6\">Contact Number:</label><label class=\"col-lg-6\"><input type=\"text\" name=\"newContact\" class=\"form-control\" value=\"".$row['nos']."\"/></label>";
 									echo "<label class=\"col-lg-6\">Blood Group:</label><label class=\"col-lg-6\">".$row['bgroup']."</label>";
-									echo "<label class=\"col-lg-6\" style=\"padding-left:0px;padding-right:0px\">Emergency Contact1:</label><label class=\"col-lg-6\">".$row['con1']."</label>";
-									echo "<label class=\"col-lg-6\" style=\"padding-left:0px;padding-right:0px\">Emergency Contact2:</label><label class=\"col-lg-6\">".$row['con2']."</label>";
-									echo "<h4><label>SUFFERING FROM</label></h4><textarea rows=\"4\" cols=\"41\" id=\"suffer\" name=\"Suffer\" value=".$row['suffer']."></textarea>";
-									echo "<h4><label>MEDICATION</label></h4><textarea rows=\"4\" cols=\"41\" id=\"med\" name=\"Med\" value=".$row['medicine']."></textarea>";
+									echo "<label class=\"col-lg-6\" style=\"padding-left:0px;padding-right:0px\">Emergency Contact1:</label><label class=\"col-lg-6\"><input type=\"text\" name=\"newEmerCon1\" class=\"form-control\" value=\"".$row['con1']."\"/></label>";
+									echo "<label class=\"col-lg-6\" style=\"padding-left:0px;padding-right:0px\">Emergency Contact2:</label><label class=\"col-lg-6\"><input type=\"text\" name=\"newEmerCon2\" class=\"form-control\" value=\"".$row['con2']."\"/></label>";
+									echo "<h4><label>SUFFERING FROM</label></h4><textarea rows=\"4\" cols=\"41\" id=\"suffer\" name=\"Suffer\">".$row['suffer']."</textarea>";
+									echo "<h4><label>MEDICATION</label></h4><textarea rows=\"4\" cols=\"41\" id=\"med\" name=\"Med\">".$row['medicine']."</textarea>";
 									echo "<h3><label>PHYSICIAN</label></h3>
 										<label>Name:</label><p><input type=\"text\" class=\"form-control\" id=\"phyname\" name=\"phyName\" placeholder=\"Physician Name\" value=".$row['doctor']."></p>
 										<label>Contact No:</label><p><input type=\"text\" class=\"form-control\" id=\"phycontact\" name=\"phyContact\" placeholder=\"Physician Contact Number\" value=".$row['contact']."></p>";
@@ -77,18 +77,21 @@
 
 
 					if(isset($_POST['submitrp'])){ // if the submit button is clicked
-						if($_POST['Suffer'] != "" || $_POST['Suffer'] != " " || $_POST['phyName'] != "" || $_POST['phyName'] != ""){
+						if($_POST['newContact'] != "" || $_POST['newContact'] != " " || $_POST['Suffer'] != "" || $_POST['Suffer'] != " " || $_POST['phyName'] != "" || $_POST['phyName'] != ""){
+							$number = $_POST['newContact'];
+							$emerNo1 = $_POST['newEmerCon1'];
+							$emerNo2 = $_POST['newEmerCon2'];
 							$suffer = $_POST['Suffer'];
 							$medicine = $_POST['Med'];
 							$docname = $_POST['phyName'];
 							$doccontact = $_POST['phyContact'];
 
-							$query = "UPDATE `hospital`.`log` SET `suffer`='$suffer', `medicine`='$medicine', `doctor`='$docname' , `contact`='$doccontact' WHERE `npid`='$id' ";
+							$query = "UPDATE `hospital`.`log` SET `nos`='$number', `con1`='$emerNo1', `con2`='$emerNo2', `suffer`='$suffer', `medicine`='$medicine', `doctor`='$docname' , `contact`='$doccontact' WHERE `npid`='$id' ";
 
 							$result = $con->query($query);
 							if($result == TRUE){
 								echo '<script type="text/javascript">
-       								$(document).onload(function(){alert("Successfully Updated Data.");});
+       								$(document).ready(function(){alert("Successfully Updated Data.");});
        							</script>';
 							}else{
 								echo '<script type="text/javascript">
