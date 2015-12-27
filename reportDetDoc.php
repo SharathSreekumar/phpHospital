@@ -61,6 +61,9 @@
     						if($result->num_rows > 0) {//checks if num_rows > 0
     							while($row = $result->fetch_assoc()) {//while row <= num_rows
     								echo "<label class=\"col-lg-12\"><input type=\"hidden\" name=\"subme\" value=".$row['npid']."/></label>";//store the id value, but not display i.e. hidden
+    								$imagen = $row['image'];//fetch row_th patient's uploaded image
+  									$imagen = base64_encode($imagen);//building back compressed image to the original image
+    								echo "<div class=\"col-lg-12\"><img style=\"width:100%;height:250px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></div>";
 									echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\">".$row['name']."</label>";//display patient's name
 									echo "<label class=\"col-lg-6\">Age:</label><label class=\"col-lg-6\">".$row['age']."</label>";//patient's age
 									echo "<label class=\"col-lg-6\">Contact Number:</label><label class=\"col-lg-6\">".$row['nos']."</label>";//patient's contact no
