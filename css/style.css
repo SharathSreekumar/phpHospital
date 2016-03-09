@@ -1,10 +1,14 @@
 html,body {
     width:100%;
     margin:0px;
-    background:-webkit-linear-gradient(left,#000000,#989898,#000000);
-            background: -o-linear-gradient(left,#000000,#989898,#000000); /* For Opera 11.1 to 12.0 */
-            background: -moz-linear-gradient(left,#000000,#989898,#000000); /* For Firefox 3.6 to 15 */
-            background: linear-gradient(to left,#000000,#989898,#000000);
+    /*background:-webkit-linear-gradient(left,#000000,#989898,#000000);*/
+    /*background: -o-linear-gradient(left,#000000,#989898,#000000);*/ /* For Opera 11.1 to 12.0 */
+    /*background: -moz-linear-gradient(left,#000000,#989898,#000000);*/ /* For Firefox 3.6 to 15 */
+    /*background: linear-gradient(to left,#000000,#989898,#000000);*/
+    background:-webkit-linear-gradient(left,#90c6e5,#cadfd5,#90c6e5);
+    background: -o-linear-gradient(left,#90c6e5,#cadfd5,#90c6e5); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left,#90c6e5,#cadfd5,#90c6e5); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to left,#90c6e5,#cadfd5,#90c6e5);
 }
 
 ul{
@@ -17,10 +21,27 @@ ul{
 }
 
 .container-fluid {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.img{ 
+  background:#ffffff;
+  /*padding:12px;
+  border:1px solid #999999;*/
+}
+        
+.backgrnd{
+  background-image:url("../imageBack/hospital.jpg");
+  /*background-position: center;*/
+  background-size: cover;
+}
+
+.transbox{
+  background: rgba(255,255,255,0.3);
+  /*opacity: 0.4;*/
 }
 
 .navbar {
@@ -30,7 +51,7 @@ ul{
 	 padding-right: 0; 
     padding-left: 0;
     border-radius: 0;
-    background-color: #b0b0b0;
+    background-color: #e5e5e5;
     box-shadow: 0px 2px 2px black;
 }
 

@@ -26,9 +26,10 @@
     $imageType = mysqli_real_escape_string($con,"image/png");     //tells file type - image/ video, etc
     $con1 = $_POST["newEmerCon1"];
     $con2 = $_POST["newEmerCon2"];
-
+    $dateVisit = Date("Y-m-d");
+    
     if(substr($imageType,0,5)=="image"){  
-      $query = "INSERT INTO `hospital`.`log`(`name`,`addr`,`dob`,`age`,`nos`,`bgroup`,`image`,`con1`,`con2`)VALUES('$name','$addr','$dob','$age','$nos','$bgroup','$imageData','$con1','$con2');";
+      $query = "INSERT INTO `hospital`.`log`(`name`,`addr`,`dob`,`age`,`nos`,`bgroup`,`image`,`con1`,`con2`,`date_visit`)VALUES('$name','$addr','$dob','$age','$nos','$bgroup','$imageData','$con1','$con2','$dateVisit');";
       if($con->query($query) == TRUE){
         include("np.html");
         echo <<<EOF

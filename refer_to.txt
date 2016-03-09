@@ -1,0 +1,19 @@
+Please refer to the initial project i.e. folder-name:final given by author
+Project:author:Vishaka
+
+Currently developments:
+- Login
+- Signup
+- linking db to above 2 pages
+- Uploading image to db(MySQL) for new Patient
+- adaptable search w.r.t names
+- list displayed in descending order w.r.t Date_visit and acsending w.r.t name
+- changed the background to image
+- changed the code from {update} to {replicate old report and insert the new modified report}
+- display past records in the report to view the past record + displays the list of all the reports expect the current report being viewed
+- changed the layout of newPatient page & view Patient Page
+- 
+
+TO Work on:
+-Form design & db conn for existing Patient
+-features to links on header

@@ -6,23 +6,8 @@
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <style type="text/css">
-        body{
-            margin:0;
-            padding:0;
-            background:-webkit-linear-gradient(left,#000000,#989898,#000000);
-            background: -o-linear-gradient(left,#000000,#989898,#000000); /* For Opera 11.1 to 12.0 */
-            background: -moz-linear-gradient(left,#000000,#989898,#000000); /* For Firefox 3.6 to 15 */
-            background: linear-gradient(to left,#000000,#989898,#000000);
-        }
-        .img{ 
-            background:#ffffff;
-            /*padding:12px;
-            border:1px solid #999999;*/
-        }
-</style>
 </head>
-<body style="background-color:#dfe3ee;">
+<body class="backgrnd">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -56,71 +41,89 @@
         <div class="container col-lg-4"></div>
     </div>
     <div class = "row">
-        <div class="container col-lg-4"></div>
-        <div class="container col-lg-4">
-            <div class="jumbotron">
+        <div class="container col-lg-2"></div>
+        <div class="container col-lg-8">
+            <div class="jumbotron transbox">
                 <form action="newpat.php" method="post" enctype="multipart/form-data" onSubmit="return verifyData()" id="formNewPat">
-                    <label>Name:</label><p><input type="text" class="form-control" id="newname" name="newName" placeholder="Name"></p>
-                    <label>Address:</label><p><input type="text" class="form-control" id="newaddr" name="newAddr" placeholder="Address"></p>
-                    <label>DoB:</label><p><input type="date" class="form-control" id="newdob" name="newDoB" placeholder="Date of Birth"></p>
-                    <label>Age:</label><p><input type="number" class="form-control" id="newage" name="newAge" min="1" max="100" placeholder="Age"></p>
-                    <label>Contact No:</label><p><input type="text" class="form-control" id="newcontact" name="newContact" placeholder="Contact Number"></p>
-                    <label>Blood Group:</label>
-                    <div class="btn-group">
-                        <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="bloodgrp" name="bloodGroup">
-                            <option value="A+">A+</option>
-                            <option value="B+">B+</option>
-                            <option value="AB+">AB+</option>
-                            <option value="O+">O+</option>
-                            <option value="A-">A-</option>
-                            <option value="B-">B-</option>
-                            <option value="AB-">AB-</option>
-                            <option value="O-">O-</option>
-                        </select>
-                    </div><br/><br/>
-                    <div id="main" style="height:320px;width:100%">
-                        <label style="padding-right:15px">Image:</label><input name="camBtn" type="button" value="Take Photo" class="btn btn-default" onClick="take_snapshot()">&nbsp;&nbsp;&nbsp;<input name="resetBtn" type="button" value="Reset Camera" class="btn btn-default" onClick="reset_snapshot()">
-                        <div id="content" style="float:left; width:500px; margin-left:-100px; margin-top:20px;" align="center">
-                            <script type="text/javascript" src="webcam.js"></script>
-                            <script language="JavaScript">
-                                document.write( webcam.get_html(400, 240));
+                    <div class="row">
+                        <div class="container col-lg-6 col-sm-6 col-xs-12">
+                            <label>Name:</label><p><input type="text" class="form-control" id="newname" name="newName" placeholder="Name" autofocus></p>
+                            <label>DoB:</label><p><input type="date" class="form-control" id="newdob" name="newDoB" placeholder="Date of Birth"></p>
+                            <label>Blood Group:</label><br/>
+                            <div class="btn-group" style="padding-bottom:17px">
+                                <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="bloodgrp" name="bloodGroup">
+                                    <option value="A+">A+</option>
+                                    <option value="B+">B+</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="O+">O+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div><br/>
+                            <label>Emergency Contact No1:</label><p><input type="text" class="form-control" id="new_emercon1" name="newEmerCon1" placeholder="Emergency Contact Number"></p>
+                        </div>
+                        <div class="container col-lg-6 col-sm-6 col-xs-12">
+                            <label>Address:</label><p><input type="text" class="form-control" id="newaddr" name="newAddr" placeholder="Address"></p>
+                            <label>Age:</label><p><input type="number" class="form-control" id="newage" name="newAge" min="1" max="100" placeholder="Age"></p>
+                            <label>Contact No:</label><p><input type="text" class="form-control" id="newcontact" name="newContact" placeholder="Contact Number"></p>
+                            <label>Emergency Contact No2:</label><p><input type="text" class="form-control" id="new_emercon2" name="newEmerCon2" placeholder="Emergency Contact Number"></p>
+                        </div>
+                        <div class="container col-lg-3"></div>
+                        <div class="container col-lg-6">
+                            <div id="main" style="height:320px;width:100%">
+                                <label style="padding-right:15px">Image:</label><input name="camBtn" type="button" value="Take Photo" class="btn btn-default" onClick="take_snapshot()">&nbsp;&nbsp;&nbsp;<input name="resetBtn" type="button" value="Reset Camera" class="btn btn-default" onClick="reset_snapshot()"><br/>
+                                <div id="content" style="float:left;width:500px; margin-left:-50px; margin-top:20px;" align="center">
+                                    <script type="text/javascript" src="webcam.js"></script>
+                                    <script language="JavaScript">
+                                        document.write( webcam.get_html(400, 240));
+                                    </script>
+                                </div>
+                                <script  type="text/javascript">
+                                    webcam.set_api_url( 'handleimage.php' );
+                                    webcam.set_quality( 90 ); // JPEG quality (1 - 100)
+                                    webcam.set_shutter_sound( true ); // play shutter click sound
+                                    webcam.set_hook( 'onComplete', 'my_completion_handler' );
+
+                                    function take_snapshot(){
+                                        // take snapshot and upload to server
+                                        webcam.snap();
+                                    }
+
+                                    function reset_snapshot(){
+                                        // reset camera for another shot
+                                        webcam.reset();
+                                    }
+
+                                    function my_completion_handler(msg) {
+                                        // extract URL out of PHP output
+                                        if (msg.match(/(http\:\/\/\S+)/)) {
+                                            // show JPEG image in page
+                                            //document.getElementById('content').innerHTML ="<img name=\"imgCam\" src="+msg+" class=\"img-  rounded\">";
+                                            // reset camera for another shot
+                                            //webcam.reset();
+                                        }else { alert("Error occured in loading image from " + msg); }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <div class="container col-lg-3"></div>
+                        <div class="container col-lg-12">
+                            <div class="checkbox"><label><input type="checkbox" id="checkNp"> I hereby accept that all the information provided by me is true</label></div>
+                            <button type="submit" class="btn btn-success" id="submitNp" disabled onClick="pop_date">Create New Record</button>
+                            <script type="text/javascript">
+                                function pop_date(){
+                                    var dateBirth = document.getElementById('newdob').value();
+                                    alert("your birth date is " + String.valueof(dateBirth));
+                                }
                             </script>
                         </div>
-                        <script  type="text/javascript">
-                            webcam.set_api_url( 'handleimage.php' );
-                            webcam.set_quality( 90 ); // JPEG quality (1 - 100)
-                            webcam.set_shutter_sound( true ); // play shutter click sound
-                            webcam.set_hook( 'onComplete', 'my_completion_handler' );
-
-                            function take_snapshot(){
-                                // take snapshot and upload to server
-                                webcam.snap();
-                            }
-
-                            function reset_snapshot(){
-                                // reset camera for another shot
-                                webcam.reset();
-                            }
-
-                            function my_completion_handler(msg) {
-                                // extract URL out of PHP output
-                                if (msg.match(/(http\:\/\/\S+)/)) {
-                                    // show JPEG image in page
-                                    //document.getElementById('content').innerHTML ="<img name=\"imgCam\" src="+msg+" class=\"img-rounded\">";
-                                    // reset camera for another shot
-                                    //webcam.reset();
-                                }else { alert("Error occured in loading image from " + msg); }
-                            }
-                        </script>
                     </div>
-                    <label>Emergency Contact No1:</label><p><input type="text" class="form-control" id="new_emercon1" name="newEmerCon1" placeholder="Emergency Contact Number"></p>
-                    <label>Emergency Contact No2:</label><p><input type="text" class="form-control" id="new_emercon2" name="newEmerCon2" placeholder="Emergency Contact Number"></p>
-                    <div class="checkbox"><label><input type="checkbox" id="checkNp"> I hereby accept that all the information provided by me is true</label></div>
-                    <button type="submit" class="btn btn-success" id="submitNp" disabled>Create New Record</button>
                 </form>
             </div>
         </div>
-        <div class="container col-lg-4"></div>
+        <div class="container col-lg-2"></div>
     </div>
     <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

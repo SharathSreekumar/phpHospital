@@ -1,5 +1,10 @@
 # phpHospital 
 
+A website designed for the hospital to ease up the job of doctors and patients by storing data in local server.
+Doctors can view patients past reports i.e. Symptoms/Suffering, Medication prescribed, Doc's name and Number.
+The admin or the Receptionist enters the data of the patient.
+The patient's can be identified using the image licked from the webcam, and the biometric image [finger print].
+
 Page Description:
 
 Common Page/Interface [for both admin & doctor]:

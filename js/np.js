@@ -1,7 +1,39 @@
+function getAge(birth) {
+
+    var today = new Date();
+    var nowyear = today.getFullYear();
+    var nowmonth = today.getMonth();
+    var nowday = today.getDate();
+
+    var birthyear = birth.getFullYear();
+    var birthmonth = birth.getMonth();
+    var birthday = birth.getDate();
+
+    var age = nowyear - birthyear;
+    var age_month = nowmonth - birthmonth;
+    var age_day = nowday - birthday;
+   
+    if(age_month < 0 || (age_month == 0 && age_day <0)) {
+       age = parseInt(age) -1;
+    }
+    if(age/100 <= 1)
+    	document.getElementById('newage').value = age;
+    else
+    	alert("Age crossing 100 years!!!");
+}
+
+
+$('#newdob').change(function() {
+	var enteredDate = document.getElementById('newdob').valueAsDate;
+	var month = enteredDate.getMonth() + 1;// becomes integer
+	var result = "Day: " + enteredDate.getDate() + "Month: " + month + "Year: " + enteredDate.getFullYear();//becomes string
+	getAge(enteredDate);
+});
+
 $('#checkNp').click(function () {
 	//check if checkbox is checked
 	if ($(this).is(':checked')) {
-        $('#submitNp').removeAttr('disabled'); //enable input
+		$('#submitNp').removeAttr('disabled'); //enable input
     } else {
         $('#submitNp').attr('disabled', true); //disable input
     }
