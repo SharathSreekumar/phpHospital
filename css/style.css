@@ -27,6 +27,18 @@ ul{
   margin-left: auto;
 }
 
+.icon{
+  color:transparent;
+  background-image:url("../imageBack/1.JPG");
+  background-repeat:no-repeat;
+  background-size: 30% 100% ;
+  height:50px;
+  margin-top: -14px;
+  margin-left: -13px;
+  margin-bottom: -13px;
+  margin-right: 0px;
+}
+
 .img{ 
   background:#ffffff;
   /*padding:12px;
@@ -35,6 +47,12 @@ ul{
         
 .backgrnd{
   background-image:url("../imageBack/hospital.jpg");
+  /*background-position: center;*/
+  background-size: cover;
+}
+
+.backgrnd2{
+  background-image:url("../imageBack/hospital2.jpg");
   /*background-position: center;*/
   background-size: cover;
 }

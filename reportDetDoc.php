@@ -28,7 +28,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<div class="navbar-brand">
-					<h4>HEALTHCARE</h4>
+					<h4><div class="icon">HEALTHCARE</div></h4>
 				</div>
 			</div>
 			<div class="collapse navbar-collapse col" id="bs-example-navbar-collapse-1">
@@ -78,9 +78,20 @@
     						if($result->num_rows > 0) {//checks if num_rows > 0
     							while($row = $result->fetch_assoc()) {//while row <= num_rows
     								echo "<label class=\"col-lg-12\"><input type=\"hidden\" name=\"subme\" value=".$row['npid']."/></label>";//store the id value, but not display i.e. hidden
-    								$imagen = $row['image'];//fetch row_th patient's uploaded image
-  									$imagen = base64_encode($imagen);//building back compressed image to the original image
-    								echo "<div class=\"col-lg-12\"><img style=\"width:100%;height:250px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></div>";
+    								$imageId = $row['image'];
+    								$queryI = "SELECT * FROM `hospital`.`patientimage` WHERE `imgId` = '$imageId'";
+									$resultI = $con->query($queryI);
+
+    								if($resultI->num_rows > 0) {
+        								while($rowI = $resultI->fetch_assoc()) {
+           									$imagen = $rowI['imageP'];
+            								$imagen = base64_encode($imagen);//building back compressed image to the original image
+  											echo "<div class=\"col-lg-12\"><img style=\"width:100%;height:250px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></div>";
+        								}
+    								}else{
+       									$imagen = NULL;
+    								}
+    								
     								$tempName = $row['name'];
     								$tempId = $row['npid'];
 								}
@@ -89,8 +100,9 @@
 							$query = "SELECT * FROM `hospital`.`log` WHERE `name`='$tempName' AND `npid`!= '$tempId' ORDER BY `date_visit` DESC";//find the specific patients data from the database
     						$result = $con->query($query);//execute the query
 
-    						echo "<table class=\"table\">";
-							echo "<tr><th>"."Previous Report"."</th></tr>";
+    						echo "<p style=\"margin-bottom:0px\">"."Previous Report"."</p>";
+    						echo "<div class = \"row\" style=\"height:90px;overflow: scroll;overflow-x: hidden\"><table class=\"table\">";
+							//echo "<tr><th>"."Previous Report"."</th></tr>";
 
 							if($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
@@ -98,11 +110,11 @@
 									echo "<td><button class=\"btn\" name=\"viewme\" formaction=\"reportDetDoc.php\"value=". $row['npid'] .">".$row['date_visit']."</button></td>";
 									echo "</tr>";
 								}
-								echo "</table>";
+								echo "</table></div>";
 							}else {
 								echo "<tr>";
 								echo "<td><p>"."No Previous Record"."</p></td>";
-								echo "</tr></table>";
+								echo "</tr></table></div>";
 							}
 
 							$con->close();//close the connection after execution
@@ -127,6 +139,7 @@
 
     						if($result->num_rows > 0) {//checks if num_rows > 0
     							while($row = $result->fetch_assoc()) {//while row <= num_rows
+    								echo "<label class=\"col-lg-4\"></label><label class=\"col-lg-8\"><p style=\"text-align:right;font-size:20px\">Visited on : ".$row['date_visit']."</p></label>";
     								echo "<label class=\"col-lg-12\"><input type=\"hidden\" name=\"subme\" value=".$row['npid']."/></label>";//store the id value, but not display i.e. hidden
     								echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\">".$row['name']."</label>";//display patient's name
 									echo "<label class=\"col-lg-6\">Age:</label><label class=\"col-lg-6\">".$row['age']."</label>";//patient's age
@@ -156,6 +169,29 @@
 							$con->close();//close the connection after execution
 							?>
 						</form>
+						
+						<!-- <label>View Report : <input type="file" name="upload" onchange="myFunc()" accept="application/pdf,image/*" id="selectFile"/></label>
+
+						<script type="text/javascript">
+							function myFunc(){
+								var s = document.getElementById("selectFile").value;
+            					var x = s.replace('C:\\fakepath\\','');
+            					window.open(x, '_blank', 'fullscreen=yes');
+            					return false;
+							}
+						</script>-->
+					<!-- </div>
+					<div class= "container"> -->
+						<label>View Report : <input type="file" name="upload" onchange="myFunc()" accept="application/pdf,image/*" id="selectFile"/></label>
+						<img id="reportSrc" style="width:100%;" src="imageBack\NoImageAvailable.jpg" alt="Sorry, Report unable to load"/>
+						<script type="text/javascript">
+							function myFunc(){
+								var s = document.getElementById("selectFile").value;
+            					var x = s.replace("C:\\fakepath\\","image\\");
+            					document.getElementById('reportSrc').src = x;
+            					return false;
+							}
+						</script>
 					</div>
 				</div>
 			</div>

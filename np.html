@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="navbar-brand">
-                    <h4>HEALTHCARE</h4>
+                    <h4><div class="icon">HEALTHCARE</div></h4>
                 </div>
             </div>
             <div class="collapse navbar-collapse col" id="bs-example-navbar-collapse-1">
@@ -110,6 +110,7 @@
                         </div>
                         <div class="container col-lg-3"></div>
                         <div class="container col-lg-12">
+                            <label> View Report: </label><input type="file" name="upload" onchange="myFunc()" accept="application/pdf" id="selectFile"/>
                             <div class="checkbox"><label><input type="checkbox" id="checkNp"> I hereby accept that all the information provided by me is true</label></div>
                             <button type="submit" class="btn btn-success" id="submitNp" disabled onClick="pop_date">Create New Record</button>
                             <script type="text/javascript">

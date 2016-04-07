@@ -12,7 +12,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<div class="navbar-brand">
-					<h4>HEALTHCARE</h4>
+					<h4><div class="icon">HEALTHCARE</div></h4>
 				</div>
 			</div>
 			<div class="collapse navbar-collapse col" id="bs-example-navbar-collapse-1">
@@ -62,7 +62,7 @@
         		die('Could not connect: ' . $con->connect_error);
     		}
 
-    		if(isset($_POST['searchPat']) && $_POST['searchPat']!=""){//if search box is not empty
+    		if(isset($_POST['searchPat']) && $_POST['searchPat']!=" "){//if search box is not empty
     			$patName = $_POST['searchPat'];
     			$altQuery = "SELECT `name`,MAX(`date_visit`) as 'date' FROM `hospital`.`log` WHERE `name` LIKE '%$patName%'";
     			$result2 = $con->query($altQuery);
@@ -98,11 +98,23 @@
   							echo "<td class=\"col-lg-1\">" . $row['bgroup'] . "</td>";
   							echo "<td class=\"col-lg-1\">" . $row['con1'] . "</td>";
   							echo "<td class=\"col-lg-1\">" . $row['con2'] . "</td>";
+  							$imageId = $row['image'];
+  							$queryI = "SELECT * FROM `hospital`.`patientimage` WHERE `imgId` = '$imageId'";
+        					$resultI = $con->query($queryI);
 
-  							$imagen = $row['image'];
-  							$imagen = base64_encode($imagen);//building back compressed image to the original image
-  							echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
-  							//Edit button directs the page to Update option
+        					if($resultI->num_rows > 0) {
+          						while($rowI = $resultI->fetch_assoc()) {
+            						$imagen = $rowI['imageP'];
+            						$imagen = base64_encode($imagen);//building back compressed image to the original image
+  									echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
+          						}
+        					}else{
+        						$imagen = NULL;
+        					}
+
+  							// $imagen = base64_encode($imagen);//building back compressed image to the original image
+  							// echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
+  							// //Edit button directs the page to Update option
   							//View report directs to viewing the details of the Patient
   							echo "<td class=\"col-lg-1\"><p style=\"text-align:center;\"><button type=\"submit\"class=\"btn\" name=\"subme\" style=\"width:103px;\" value=". $row['npid'] .">Edit</button></p><p><button class=\"btn\" name=\"viewme\" formaction=\"reportDetDoc.php\"value=". $row['npid'] .">View Report</button></p></td>";
 								  					
@@ -143,17 +155,28 @@
   						echo "<td class=\"col-lg-1\">" . $row['bgroup'] . "</td>";
   						echo "<td class=\"col-lg-1\">" . $row['con1'] . "</td>";
   						echo "<td class=\"col-lg-1\">" . $row['con2'] . "</td>";
+  						$imageId = $row['image'];
+  						$queryI = "SELECT * FROM `hospital`.`patientimage` WHERE `imgId` = '$imageId'";
+        				$resultI = $con->query($queryI);
 
-  						$imagen = $row['image'];
-  						$imagen = base64_encode($imagen);//building back compressed image to the original image
-  						echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
-  						//Edit button directs the page to Update option
+       					if($resultI->num_rows > 0) {
+         						while($rowI = $resultI->fetch_assoc()) {
+           						$imagen = $rowI['imageP'];
+           						$imagen = base64_encode($imagen);//building back compressed image to the original image
+  								echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
+          					}
+        				}else{
+        					$imagen = NULL;
+        				}
+
+  						// $imagen = base64_encode($imagen);//building back compressed image to the original image
+  						// echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
+  						// //Edit button directs the page to Update option
   						//View report directs to viewing the details of the Patient
-  						echo "<td class=\"col-lg-1\"><p style=\"text-align:center\"><button type=\"submit\"class=\"btn\" style=\"width:103px;\" name=\"subme\" value=". $row['npid'] .">Edit</button></p><p><button class=\"btn\" name=\"viewme\" formaction=\"reportDetDoc.php\"value=". $row['npid'] .">View Report</button></p></td>";
-	  					
+  						echo "<td class=\"col-lg-1\"><p style=\"text-align:center;\"><button type=\"submit\"class=\"btn\" name=\"subme\" style=\"width:103px;\" value=". $row['npid'] .">Edit</button></p><p><button class=\"btn\" name=\"viewme\" formaction=\"reportDetDoc.php\"value=". $row['npid'] .">View Report</button></p></td>";
+								  					
   						echo "</tr>";
 					}
-					echo "</table>";
 				}
 				$con->close();
 			}

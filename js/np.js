@@ -59,3 +59,10 @@ function verifyData(){//verify if the textbox contains value or not
 		return false;
 	}
 }
+
+function myFunc(){
+    var s = document.getElementById("selectFile").value;
+    var x = s.replace('C:\\fakepath\\','');
+    window.open(x, '_blank', 'fullscreen=yes');
+    return false;
+}

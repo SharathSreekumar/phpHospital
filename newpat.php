@@ -27,9 +27,34 @@
     $con1 = $_POST["newEmerCon1"];
     $con2 = $_POST["newEmerCon2"];
     $dateVisit = Date("Y-m-d");
+
+    $query = "SELECT MAX(`npid`) AS max FROM `hospital`.`log`";
+    $result = $con->query($query);
+
+    //get patient id
+    if($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        $patId = $row['max'] + 1;
+      }
+    }
     
-    if(substr($imageType,0,5)=="image"){  
-      $query = "INSERT INTO `hospital`.`log`(`name`,`addr`,`dob`,`age`,`nos`,`bgroup`,`image`,`con1`,`con2`,`date_visit`)VALUES('$name','$addr','$dob','$age','$nos','$bgroup','$imageData','$con1','$con2','$dateVisit');";
+    if(substr($imageType,0,5)=="image"){
+
+      $imageId = NULL;
+      $query = "INSERT INTO `hospital`.`patientimage`(`imageP`)VALUES('$imageData')";
+      echo $imageName;
+      if($con->query($query) == TRUE){
+        $query = "SELECT MAX(`imgId`) AS max FROM `hospital`.`patientimage`";
+        $result = $con->query($query);
+
+        if($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
+            $imageId = $row['max'];
+          }
+        }
+      }
+
+      $query = "INSERT INTO `hospital`.`log`(`npid`,`name`,`addr`,`dob`,`age`,`nos`,`bgroup`,`image`,`con1`,`con2`,`date_visit`)VALUES('$patId','$name','$addr','$dob','$age','$nos','$bgroup','$imageId','$con1','$con2','$dateVisit');";
       if($con->query($query) == TRUE){
         include("np.html");
         echo <<<EOF

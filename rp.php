@@ -8,12 +8,12 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 </head>
-<body>
+<body class="backgrnd2">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<div class="navbar-brand">
-					<h4>HEALTHCARE</h4>
+					<h4><div class="icon">HEALTHCARE</div></h4>
 				</div>
 			</div>
 			<div class="collapse navbar-collapse col" id="bs-example-navbar-collapse-1">
@@ -61,7 +61,6 @@
     						if($result->num_rows > 0) {
     							while($row = $result->fetch_assoc()) {
     								$imageData1 = $row['image'];
-    								$imageData1 = base64_encode($imageData1);
     								$name1 = $row['name'];
     								$dob1 = $row['dob'];
     								$age1 = $row['age'];
@@ -87,7 +86,7 @@
 						if($_POST['newContact'] != "" || $_POST['newContact'] != " " || $_POST['Suffer'] != "" || $_POST['Suffer'] != " " || $_POST['phyName'] != "" || $_POST['phyName'] != ""){
 							//transfering values to temporary variables
 							$name = $name1;
-							$imageData = mysqli_real_escape_string($con,'data:image/png;base64,'.$imageData1);
+							$imageData = $imageData1;
 							$addr = $addr1;
 							$age = $age1;//$_POST['subAge'];
 							$dob = $dob1;
@@ -101,8 +100,18 @@
 							$doccontact = $_POST['phyContact'];
 							$dateVisit = Date("Y-m-d");
 
+							$query = "SELECT MAX(`npid`) AS max FROM `hospital`.`log`";
+    						$result = $con->query($query);
+
+						    //get patient id
+    						if($result->num_rows > 0) {
+      							while($row = $result->fetch_assoc()) {
+        							$patId = $row['max'] + 1;
+      							}
+    						}
+
 							//inserting new set of reports
-							$query = "INSERT INTO `hospital`.`log`(`name`,`addr`,`dob`,`age`,`image`,`nos`,`bgroup`,`con1`,`con2`,`suffer`,`medicine`,`doctor`,`contact`,`date_visit`)VALUES('$name','$addr','$dob','$age','$imageData','$nos','$bgroup','$con1','$con2','$suffer','$medicine','$docname','$doccontact','$dateVisit');";
+							$query = "INSERT INTO `hospital`.`log`(`npid`,`name`,`addr`,`dob`,`age`,`image`,`nos`,`bgroup`,`con1`,`con2`,`suffer`,`medicine`,`doctor`,`contact`,`date_visit`)VALUES('$patId','$name','$addr','$dob','$age','$imageData','$nos','$bgroup','$con1','$con2','$suffer','$medicine','$docname','$doccontact','$dateVisit');";
 							//$query = "UPDATE `hospital`.`log` SET `nos`='$number', `con1`='$emerNo1', `con2`='$emerNo2', `suffer`='$suffer', `medicine`='$medicine', `doctor`='$docname' , `contact`='$doccontact' WHERE `npid`='$id' ";
 
 							$result = $con->query($query);

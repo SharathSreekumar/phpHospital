@@ -73,9 +73,21 @@
   					echo "<td class=\"col-lg-1\">" . $row['con1'] . "</td>";//fetch row_th patient's emergency contact no 1
   					echo "<td class=\"col-lg-1\">" . $row['con2'] . "</td>";//fetch row_th patient's emergency contact no 2
 
-  					$imagen = $row['image'];//fetch row_th patient's uploaded image
-  					$imagen = base64_encode($imagen);//building back compressed image to the original image
-  					echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
+  					$imageId = $row['image'];//fetch row_th patient's uploaded image
+  					//$imagen = base64_encode($imagen);//building back compressed image to the original image
+  					$queryI = "SELECT * FROM `hospital`.`patientimage` WHERE `imgId` = '$imageId'";
+        			$resultI = $con->query($queryI);
+       				
+       				if($resultI->num_rows > 0) {
+         				while($rowI = $resultI->fetch_assoc()) {
+           					$imagen = $rowI['imageP'];
+           					$imagen = base64_encode($imagen);//building back compressed image to the original image
+  							echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
+          				}
+        			}else{
+        				$imagen = NULL;
+        			}
+           						
   					//View report directs to viewing the details of the Patient
   					echo "<td class=\"col-lg-1\"><p style=\"text-align:center\"><button class=\"btn\" type=\"submit\" name=\"viewme\" value=\"". $row['npid'] ."\">View Report</button></p></td>";
   					
