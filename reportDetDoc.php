@@ -97,7 +97,8 @@
 								}
 							}
 							
-							$query = "SELECT * FROM `hospital`.`log` WHERE `name`='$tempName' AND `npid`!= '$tempId' ORDER BY `date_visit` DESC";//find the specific patients data from the database
+							// query fetches patient's past report based on patient's name, patient's id & patient's image id
+							$query = "SELECT * FROM `hospital`.`log` WHERE `name`='$tempName' AND `npid`!= '$tempId' AND `image` = '$imageId' ORDER BY `date_visit` DESC";//find the specific patients data from the database
     						$result = $con->query($query);//execute the query
 
     						echo "<p style=\"margin-bottom:0px\">"."Previous Report"."</p>";
@@ -182,8 +183,8 @@
 						</script>-->
 					<!-- </div>
 					<div class= "container"> -->
-						<label>View Report : <input type="file" name="upload" onchange="myFunc()" accept="application/pdf,image/*" id="selectFile"/></label>
-						<img id="reportSrc" style="width:100%;" src="imageBack\NoImageAvailable.jpg" alt="Sorry, Report unable to load"/>
+						<label>View Report : <input type="file" name="upload" onchange="myFunc()" accept="application/pdf,image/*,.jpg,.png" id="selectFile"/></label>
+						<img id="reportSrc" style="width:100%;" src="D:\images\blow_out_of_proportion.jpg" alt="Sorry, Report unable to load"/>
 						<script type="text/javascript">
 							function myFunc(){
 								var s = document.getElementById("selectFile").value;

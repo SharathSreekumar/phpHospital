@@ -21,11 +21,15 @@ function verify(){//verify(email,password,confirm-password)
 	var y = document.forms["formCreate"]["pass"].value;
 	var z = document.forms["formCreate"]["cnpass"].value;
 	var radio = $('input[name=memberCreate]:checked').length; //checks if the any radio button of that group is chosen
+	var passPattern =  "^[a-zA-Z0-9_]*$";//"/\d+/";
 
     if (x == null || x == "" || y == null || y == "" || z == null || z == "" || radio <= 0) {
         alert("Please complete the form");
         return false;
-    }else if (y!=z){
+    }else if(!y.match(/\d+/) || !y.match("^[a-zA-Z0-9_]*$")){
+    	alert("The password is not Alpha Numeric!");
+    	return false;
+    }else if (y != z){
     	alert("Password Incorrect!");
     	return false;
     }

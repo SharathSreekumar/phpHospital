@@ -57,7 +57,10 @@ function verifyData(){//verify if the textbox contains value or not
 	if(name==null || name=="" || addr==null || addr=="" || dob==null || dob=="" || age==null || age==""){
 		alert("Please complete the form");
 		return false;
-	}
+	}else if(contact.length < 10 || emerCon1.length < 10 || emerCon2.length < 10){
+        alert("Contact no size is less than 10 digits");
+        return false;
+    }
 }
 
 function myFunc(){

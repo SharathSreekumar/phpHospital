@@ -22,7 +22,7 @@
     		        	<li class="dropdown"><a href="#forms" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Forms <span class="caret"></span></a>
     		        		<ul class="dropdown-menu">
             					<li><a href="np.html">New Patient</a></li>
-            					<li><a href="rp.html">Regular Patient</a></li>
+            					<li><a href="regpat.php">Regular Patient</a></li>
           					</ul>
     		        	</li>
         	    		<li><a href="#specs">Specs</a></li>
@@ -98,9 +98,10 @@
   							echo "<td class=\"col-lg-1\">" . $row['bgroup'] . "</td>";
   							echo "<td class=\"col-lg-1\">" . $row['con1'] . "</td>";
   							echo "<td class=\"col-lg-1\">" . $row['con2'] . "</td>";
-  							$imageId = $row['image'];
+  							
+                $imageId = $row['image'];
   							$queryI = "SELECT * FROM `hospital`.`patientimage` WHERE `imgId` = '$imageId'";
-        					$resultI = $con->query($queryI);
+        				$resultI = $con->query($queryI);
 
         					if($resultI->num_rows > 0) {
           						while($rowI = $resultI->fetch_assoc()) {
@@ -127,11 +128,14 @@
     			}
 				$con->close();
     		}else{
-    			$query = "SELECT * FROM `hospital`.`log` ORDER BY `name` ASC,`date_visit` DESC";//display all the patients data from the database ordered name in Ascending & date in descending
-    			$result = $con->query($query);
+    			//$query = "SELECT * FROM `hospital`.`log` ORDER BY `name` ASC,`date_visit` DESC";//display all the patients data from the database ordered name in Ascending & date in descending
+
+          // 
+    			$query = "SELECT max(`npid`) as npid1,`name`,`addr`,`dob`,`age`,`nos`,`bgroup`,`con1`,`con2`,max(`date_visit`),`image` FROM `hospital`.`log` GROUP BY `image` ORDER BY `name` ASC";
+          $result = $con->query($query);
 
     			if($result->num_rows > 0) {// if row > 0, then 'n' data exists
-    				echo "<table class=\"table table-bordered\">
+    				echo "<table class=\"table\">
 					<tr>
 					<th class=\"col-lg-1\">Name</th>
 					<th class=\"col-lg-1\">Address</th>
@@ -173,8 +177,7 @@
   						// echo "<td class=\"col-lg-1\"><img style=\"width:100%;height:100px;padding-top:5px;padding-bottom:5px;\" src=\"data:image/png;base64," . $imagen . "\"/></td>";//displays the image
   						// //Edit button directs the page to Update option
   						//View report directs to viewing the details of the Patient
-  						echo "<td class=\"col-lg-1\"><p style=\"text-align:center;\"><button type=\"submit\"class=\"btn\" name=\"subme\" style=\"width:103px;\" value=". $row['npid'] .">Edit</button></p><p><button class=\"btn\" name=\"viewme\" formaction=\"reportDetDoc.php\"value=". $row['npid'] .">View Report</button></p></td>";
-								  					
+    						echo "<td class=\"col-lg-1\"><p style=\"text-align:center;\"><button type=\"submit\"class=\"btn\" name=\"subme\" style=\"width:103px;\" value=". $row['npid1'] .">Edit</button></p><p><button class=\"btn\" name=\"viewme\" formaction=\"reportDetDoc.php\" value=". $row['npid1'] .">View Report</button></p></td>";
   						echo "</tr>";
 					}
 				}
