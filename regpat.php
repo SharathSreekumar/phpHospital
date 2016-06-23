@@ -127,7 +127,7 @@
 					}
     			}
 				$con->close();
-    		}else{
+    		}else{ // search box is empty
     			//$query = "SELECT * FROM `hospital`.`log` ORDER BY `name` ASC,`date_visit` DESC";//display all the patients data from the database ordered name in Ascending & date in descending
 
           // 
@@ -135,7 +135,8 @@
           $result = $con->query($query);
 
     			if($result->num_rows > 0) {// if row > 0, then 'n' data exists
-    				echo "<table class=\"table\">
+    				//echo "<table class=\"table table-bordered\" border=\"5\" BORDERCOLOR=\"ffffff\" \">
+            echo "<table class=\"table\" \">
 					<tr>
 					<th class=\"col-lg-1\">Name</th>
 					<th class=\"col-lg-1\">Address</th>

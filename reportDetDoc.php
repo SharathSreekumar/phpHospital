@@ -142,7 +142,7 @@
     							while($row = $result->fetch_assoc()) {//while row <= num_rows
     								echo "<label class=\"col-lg-4\"></label><label class=\"col-lg-8\"><p style=\"text-align:right;font-size:20px\">Visited on : ".$row['date_visit']."</p></label>";
     								echo "<label class=\"col-lg-12\"><input type=\"hidden\" name=\"subme\" value=".$row['npid']."/></label>";//store the id value, but not display i.e. hidden
-    								echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\">".$row['name']."</label>";//display patient's name
+    								echo "<label class=\"col-lg-6\">Name:</label><label class=\"col-lg-6\"><input type=\"hidden\" name=\"patiname\" id=\"patname\" value=".$row['name']." />".$row['name']."</label>";//display patient's name
 									echo "<label class=\"col-lg-6\">Age:</label><label class=\"col-lg-6\">".$row['age']."</label>";//patient's age
 									echo "<label class=\"col-lg-6\">Contact Number:</label><label class=\"col-lg-6\">".$row['nos']."</label>";//patient's contact no
 									echo "<label class=\"col-lg-6\">Blood Group:</label><label class=\"col-lg-6\">".$row['bgroup']."</label>";//patient's blood Grp
@@ -188,7 +188,10 @@
 						<script type="text/javascript">
 							function myFunc(){
 								var s = document.getElementById("selectFile").value;
-            					var x = s.replace("C:\\fakepath\\","image\\");
+								var name = document.getElementById("patname").value;
+            					alert(name);
+            					var x = s.replace("C:\\fakepath\\","image\\" + name + "\\");
+            					alert(x);
             					document.getElementById('reportSrc').src = x;
             					return false;
 							}
